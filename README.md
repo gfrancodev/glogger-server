@@ -1,7 +1,15 @@
+<h2 align="center">
+  GLOGGER 
+  <h3 align="center">
+    Log capture server, connection is only allowed for updated IPs.
+    <p align="center">
+       </br>
+  <img src="https://i.imgur.com/t9HaoC7.png" alt="Glogger" />
+</p>
+</h3>
+</h2
 
-![Logo](https://i.imgur.com/t9HaoC7.png)
-
-[@gfrancodev/glogger/server](https://github.com/gfrancodev/glogger) 
+[@gfrancodev/glogger/server](https://github.com/gfrancodev/glogger-server) 
 
 ## Installation
 
