@@ -1,0 +1,30 @@
+name: glogger
+image: glogger:latest
+appPort: 3000
+wsPort: 3005
+srvPort: 80
+
+deployment:
+  replicaCount: 3
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi
+
+ingress: 
+  http: glogger.gfrancodev.com
+  ws: glogger.gfrancodev.com
+  ssl: glogger
+
+database:
+  mongo_uri: 
+
+configMap:
+  name: glogger
+
+hpa:
+  CPUUtilization: 50
+  memoryUtilization: 70

@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Log {
+  id         String   @id @default(uuid()) @map("_id")
+  priority   Int
+  type       Type
+  ip         String
+  hostname   String
+  program   String
+  pid        Int?
+  message    String
+  data       Json?
+  created_at DateTime @default(now())
+
+  @@map("logs")
+}
+
+enum Type {
+  INFO
+  DEBUG
+  ERROR
+  WARNING
+  AUDIT
+  ACCESS
+  PERFORMANCE
+  SECURITY
+  SYSTEM
+  CUSTOM
+  TRANSACTION
+  DIAGNOSTIC
+  CHANGE
+  EVENT
+  ERROR_REPORTING
+  DEPENDENCY
+  VERBOSE
+}
+
+
+model Allow {
+  id          String     @id @default(uuid()) @map("_id")
+  address     String   @unique
+
+  @@map("allow")
+}

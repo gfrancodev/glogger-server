@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}
+  namespace: {{ default "default" .Release.Namespace }}
+spec:
+  replicas: {{ default 1 .Values.deployment.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+    spec:
+      volumes:
+        - name: {{ .Values.storage.pvc }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.storage.claimName }}
+      containers:
+        - image: {{ .Values.image }}
+          name: {{ .Values.name }}
+          ports:
+            - containerPort: {{ default 3000 .Values.appPort }}
+              name: http
+            - containerPort: {{ default 3005 .Values.wsPort }}
+              name: ws
+          envFrom:
+              - configMapRef:
+                  name: {{ .Values.configMap.name }}
+          volumeMounts:
+            - name: {{ .Values.storage.pvc }}
+              mountPath: {{ .Values.storage.mountPath }}

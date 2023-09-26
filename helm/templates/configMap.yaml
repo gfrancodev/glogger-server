@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.name }}
+  namespace: {{ default "default" .Release.Namespace }}
+data:
+  DATABASE_URL: {{ .Values.database.mongo_uri }}
+  PORT: {{ .Values.appPort }}

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.name }}
+spec:
+  ports:
+    - name: http
+      port: {{ .Values.srvPort }}
+      targetPort: http
+    - name: ws
+      port: {{ .Values.wsPort }}
+      targetPort: ws
+  selector:
+    app: {{ .Values.name }}
+  type: ClusterIP
